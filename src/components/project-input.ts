@@ -1,7 +1,7 @@
-import { Project } from '../models/interfaces.js';
-import { Component } from './base-component.js';
-import { Autobind } from '../decorators/autobind.js';
-import { validate, ValidatableObject } from '../utility/validation.js';
+import { Project } from '../models/interfaces-&-types.js';
+import Component from './base-component.js';
+import { Autobind as autobind } from '../decorators/autobind.js';
+import * as Validation from '../utility/validation.js';
 import { projectState } from '../state/project-state.js';
 //ProjectInput Class
 export class ProjectInput extends Component<HTMLDivElement, HTMLElement> {
@@ -26,25 +26,25 @@ export class ProjectInput extends Component<HTMLDivElement, HTMLElement> {
 		const descriptionValue = this.descriptionInputElement.value;
 		const peopleValue = this.peopleInputElement.value;
 
-		const titleValidatable: ValidatableObject = {
+		const titleValidatable: Validation.ValidatableObject = {
 			value: titleValue,
 			required: true,
 		};
-		const descriptionValidatable: ValidatableObject = {
+		const descriptionValidatable: Validation.ValidatableObject = {
 			value: descriptionValue,
 			required: true,
 			minLength: 5,
 		};
-		const peopleValidatable: ValidatableObject = {
+		const peopleValidatable: Validation.ValidatableObject = {
 			value: +peopleValue,
 			required: true,
 			min: 1,
 			max: 5,
 		};
 		if (
-			!validate(titleValidatable) ||
-			!validate(descriptionValidatable) ||
-			!validate(peopleValidatable)
+			!Validation.validate(titleValidatable) ||
+			!Validation.validate(descriptionValidatable) ||
+			!Validation.validate(peopleValidatable)
 		) {
 			alert('Invalid input. Please try again');
 			return;
@@ -70,7 +70,7 @@ export class ProjectInput extends Component<HTMLDivElement, HTMLElement> {
 		this.descriptionInputElement.value = '';
 		this.peopleInputElement.value = '';
 	}
-	@Autobind
+	@autobind
 	private submitHandler(event: Event) {
 		event.preventDefault();
 		const userInput = this.gatherUserInput();

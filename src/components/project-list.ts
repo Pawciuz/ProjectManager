@@ -1,5 +1,5 @@
-import { Project, ProjectStatus, DragTarget } from '../models/interfaces.js';
-import { Component } from './base-component.js';
+import { Project, ProjectStatus, DragTarget } from '../models/interfaces-&-types.js';
+import Component from './base-component.js';
 import { Autobind } from '../decorators/autobind.js';
 import { projectState } from '../state/project-state.js';
 import { ProjectItem } from './project-item.js';

@@ -1,4 +1,4 @@
-import { Project, ProjectStatus } from '../models/interfaces.js';
+import { Project, ProjectStatus } from '../models/interfaces-&-types.js';
 //Project State Management
 type Listener<T> = (items: T[]) => void;
 abstract class State<T> {
