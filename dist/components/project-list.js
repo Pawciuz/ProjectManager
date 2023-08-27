@@ -18,21 +18,21 @@ export class ProjectList extends Component {
         this.listId = `${this.type}-projects-list`;
         this.configure();
         this.renderContent();
+        this.listEl = this.element.querySelector('ul');
     }
     dragOverHandler(event) {
         if (event.dataTransfer && event.dataTransfer.types[0] === 'text/plain') {
             event.preventDefault();
-            const listEl = this.element.querySelector('ul');
-            listEl.classList.add('droppable');
+            this.listEl.classList.add('droppable');
         }
     }
     dropHandler(event) {
         const projectId = event.dataTransfer.getData('text/plain');
         projectState.moveProject(projectId, this.type === 'active' ? ProjectStatus.Active : ProjectStatus.Finished);
+        this.listEl.classList.remove('droppable');
     }
     dragLeaveHandler(_) {
-        const listEl = this.element.querySelector('ul');
-        listEl.classList.remove('droppable');
+        this.listEl.classList.remove('droppable');
     }
     configure() {
         this.element.addEventListener('dragover', this.dragOverHandler);
